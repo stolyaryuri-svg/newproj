@@ -30,5 +30,6 @@ public class Main {
         }
         System.out.printf("SQL complete");
         //System.out.printf("SQL new line");
+        //тестирование вывода
     }
 }
