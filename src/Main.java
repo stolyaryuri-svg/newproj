@@ -29,5 +29,6 @@ public class Main {
             e.printStackTrace();
         }
         System.out.printf("SQL complete");
+        System.out.printf('SQL new line');
     }
 }
