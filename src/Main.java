@@ -13,7 +13,7 @@ public class Main {
         String url = "jdbc:postgresql://localhost:5432/userdb";
         String username = "postgres";
         String pass = "mypass";
-
+        /*
         try    {
             Connection connect = DriverManager.getConnection(url,username, pass);
             Statement statement = connect.createStatement();
@@ -28,6 +28,11 @@ public class Main {
         catch (SQLException e){
             e.printStackTrace();
         }
+        */
+
+        calltest call1 = new calltest();
+        call1.pay();
+
         System.out.printf("SQL complete");
         //System.out.printf("SQL new line");
         //тестирование вывода
