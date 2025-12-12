@@ -2,6 +2,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 import com.sun.org.apache.xpath.internal.objects.XString;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,28 +13,27 @@ public class Main {
     public static void main(String[] args) {
         String url = "jdbc:postgresql://localhost:5432/userdb";
         String username = "postgres";
-        String pass = "mypass";
-        /*
+        String pass = "password";
+
         try    {
             Connection connect = DriverManager.getConnection(url,username, pass);
             Statement statement = connect.createStatement();
-            //statement.executeUpdate("INSERT INTO customers (id,firstname,age) VALUES (2, 'John', 21)");
+            statement.executeUpdate("INSERT INTO customers (customer_id,first_name,age) VALUES (2, 'Jack', 23)");
             //ResultSet result = result.executeQuery("SELECT firstname FROM customers");
-            ResultSet result = statement.executeQuery("SELECT firstname from customers");
-            while (result.next()){
-                String fst = result.getString(1);
-                System.out.printf("%s",fst);
-            }
+
+            //while (result.next()){
+            //    String fst = result.getString(1);
+            //    System.out.printf("%s",fst);
+            //}
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        */
 
-        calltest call1 = new calltest();
-        call1.pay();
+        //calltest call1 = new calltest();
+        //call1.pay();
 
-        System.out.printf("SQL complete");
+        System.out.printf("SQL connection");
         //System.out.printf("SQL new line");
         //тестирование вывода
         //в новой ветке есть новый код
