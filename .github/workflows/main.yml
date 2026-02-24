@@ -1,0 +1,31 @@
+name: Build for Linux
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04  # Целевая версия Linux
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup build environment
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential cmake git
+
+      - name: Build project
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make -j$(nproc)
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-binary
+          path: build/your-executable  # Укажите путь к вашему бинарнику
