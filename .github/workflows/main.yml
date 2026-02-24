@@ -1,4 +1,4 @@
-name: Build for Linux
+name: Build JAR with Maven
 on:
   push:
     branches: [ main ]
@@ -7,25 +7,30 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04  # Целевая версия Linux
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup build environment
-        run: |
-          sudo apt update
-          sudo apt install -y build-essential cmake git
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
 
-      - name: Build project
-        run: |
-          mkdir build
-          cd build
-          cmake ..
-          make -j$(nproc)
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
-      - name: Upload artifact
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux-binary
-          path: build/your-executable  # Укажите путь к вашему бинарнику
+          name: app-jar
+          path: target/*.jar
